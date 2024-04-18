@@ -19,7 +19,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="8dp" />
 
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,18 +34,12 @@
 
 
             <SearchView
-                android:layout_width="256dp"
+                android:layout_width="296dp"
                 android:layout_height="wrap_content"
                 android:radius="16dp"
                 android:background="@color/grey">
 
             </SearchView>
-
-            <ImageButton
-                android:id="@+id/clear_button"
-                android:layout_width="42dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/baseline_close_24"  android:background="@color/grey"  />
 
             <ImageButton
                 android:id="@+id/filter_button"

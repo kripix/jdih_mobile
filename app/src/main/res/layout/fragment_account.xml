@@ -4,4 +4,10 @@
     android:id="@+id/acc_frag"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AccountFragment"/>
+    tools:context=".AccountFragment">
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</FrameLayout>
