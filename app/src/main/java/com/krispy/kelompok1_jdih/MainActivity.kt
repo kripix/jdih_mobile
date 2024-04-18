@@ -27,12 +27,15 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId) {
                 R.id.home_icon -> replaceFragment(HomeFragment())
                 R.id.docs_icon -> replaceFragment(DocsFragment())
-                R.id.account_icon-> replaceFragment(AccountFragment())
+                R.id.account_icon-> replaceFragment(AboutFragment())
                 else -> {
                 }
             }
             true
         }
+
+
+
     }
 
     private fun replaceFragment(fragment: Fragment){

@@ -72,7 +72,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/textView10"
+                                android:id="@+id/jumlah_puu"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="234"
@@ -94,7 +94,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/textView8"
+                                android:id="@+id/jumlah_monografi"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="66"
@@ -116,7 +116,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/textView12"
+                                android:id="@+id/jumlah_artikel"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="54"
@@ -138,7 +138,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/textView6"
+                                android:id="@+id/jumlah_putusan"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="128"
@@ -193,18 +193,20 @@
                             android:textStyle="bold" />
 
                         <Button
-                            android:id="@+id/button"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/btn_listDocs"
+                            android:layout_width="56dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Lihat semua"
                             android:textColor="@color/black"
-                            android:textSize="10sp" />
+                            android:textSize="10sp"
+                            android:background="@android:color/transparent"/>
 
 
                     </LinearLayout>
 
                     <ListView
+                        android:id="@+id/list_newDocs"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
 
@@ -246,16 +248,18 @@
                             android:textStyle="bold" />
 
                         <Button
-                            android:id="@+id/btn_view_berita"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/btn_listNews"
+                            android:layout_width="56dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Lihat semua"
                             android:textColor="@color/black"
-                            android:textSize="10sp" />
+                            android:textSize="10sp"
+                            android:background="@android:color/transparent"/>
                     </LinearLayout>
 
                     <ListView
+                        android:id="@+id/list_News"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
 

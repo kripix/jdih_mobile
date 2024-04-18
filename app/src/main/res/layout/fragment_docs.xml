@@ -34,7 +34,7 @@
 
 
             <SearchView
-                android:layout_width="296dp"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:radius="16dp"
                 android:background="@color/grey">
@@ -43,7 +43,7 @@
 
             <ImageButton
                 android:id="@+id/filter_button"
-                android:layout_width="42dp"
+                android:layout_width="56dp"
                 android:layout_height="match_parent"
                 android:radius="16dp"
                 android:src="@drawable/baseline_filter_list_24"  android:background="@color/teal"   />
