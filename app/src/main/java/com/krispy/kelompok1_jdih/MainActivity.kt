@@ -1,5 +1,6 @@
 package com.krispy.kelompok1_jdih
 
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,8 @@ import androidx.fragment.app.Fragment
 import com.krispy.kelompok1_jdih.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var db : SQLiteDatabase
     private lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +37,23 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        val intent = intent
+        val fragmentName = intent.getStringExtra("list")
+
+        if (fragmentName == "Docs") {
+            binding.bottomNav.selectedItemId = R.id.docs_icon
+            replaceFragment(DocsFragment())
+        }
+
+        db = DBOpenHelper(this).writableDatabase
+
 
 
     }
 
+    fun getDB() : SQLiteDatabase {
+        return db
+    }
     private fun replaceFragment(fragment: Fragment){
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()

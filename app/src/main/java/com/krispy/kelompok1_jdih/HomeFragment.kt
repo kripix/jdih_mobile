@@ -1,10 +1,12 @@
 package com.krispy.kelompok1_jdih
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import com.krispy.kelompok1_jdih.databinding.FragmentHomeBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,23 +23,38 @@ class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var binding = FragmentHomeBinding.inflate(layoutInflater)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
     }
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
 
+
     ): View? {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        binding.btnListDocs.setOnClickListener{
+            val intent = Intent(requireActivity(), MainActivity::class.java)
+            intent.putExtra("list", "Docs")
+            startActivity(intent)
+        }
+
+        binding.btnListNews.setOnClickListener{
+            val intent = Intent(requireActivity(), NewsActivity::class.java)
+            startActivity(intent)
+
+        }
+
+
         return binding.root
     }
 
