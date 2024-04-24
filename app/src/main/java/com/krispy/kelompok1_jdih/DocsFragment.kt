@@ -5,6 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.krispy.kelompok1_jdih.databinding.FragmentDocsBinding
+import com.krispy.kelompok1_jdih.room.Dokumen
+import com.krispy.kelompok1_jdih.room.DokumenDB
+import com.krispy.kelompok1_jdih.room.constant
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
+//import com.krispy.kelompok1_jdih.room.NoteDAO  // Import NoteDAO
+//import com.krispy.kelompok1_jdih.room.AppDatabase
+
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +38,10 @@ class DocsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var binding: FragmentDocsBinding
+
+    val db by lazy { DokumenDB(this.requireContext()) }
+    lateinit var doksAdapter : item_docs
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,26 +56,24 @@ class DocsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_docs, container, false)
+        binding = FragmentDocsBinding.inflate(inflater, container, false)
+
+        binding.filterDocs.setOnClickListener {
+            val dialog = BottomSheetDialog(requireContext())
+            val view = LayoutInflater.from(requireContext()).inflate(R.layout.filter_docs, null)
+            val btnClose = view.findViewById<Button>(R.id.idBtnDismiss)
+            btnClose.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.setCancelable(false)
+            dialog.setContentView(view)
+            dialog.show()
+        }
+
+        binding.rvDocs.layoutManager = LinearLayoutManager(this.requireContext())
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DocsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DocsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }

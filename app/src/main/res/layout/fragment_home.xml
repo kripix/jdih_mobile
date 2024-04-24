@@ -205,12 +205,11 @@
 
                     </LinearLayout>
 
-                    <ListView
-                        android:id="@+id/list_newDocs"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_new_docs"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"/>
                 </LinearLayout>
 
             </FrameLayout>
@@ -258,10 +257,11 @@
                             android:background="@android:color/transparent"/>
                     </LinearLayout>
 
-                    <ListView
-                        android:id="@+id/list_News"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_new_news"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"/>
 
                 </LinearLayout>
             </FrameLayout>

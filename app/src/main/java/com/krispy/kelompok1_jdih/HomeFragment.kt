@@ -1,13 +1,22 @@
 package com.krispy.kelompok1_jdih
 
 import android.content.Intent
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.CursorAdapter
+import android.widget.ListAdapter
+import android.widget.Toast
+import androidx.cursoradapter.widget.SimpleCursorAdapter
 
 import com.krispy.kelompok1_jdih.databinding.FragmentHomeBinding
+import java.util.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,7 +32,6 @@ class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -41,6 +49,7 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+//        db = this,parent.getDB()
 
         binding.btnListDocs.setOnClickListener{
             val intent = Intent(requireActivity(), MainActivity::class.java)
@@ -48,15 +57,40 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+//        binding.listNewDocs.setOnItemClickListener{parent,view,p1,id->
+//            val idDocs = this.DocumentList.getItem(p1)
+//            val intent = Intent(requireActivity(), DetailDocsActivity::class.java)
+//            intent.putExtra("this_docs" , "$idDocs")
+//            startActivity(intent)
+//        }
+
         binding.btnListNews.setOnClickListener{
             val intent = Intent(requireActivity(), NewsActivity::class.java)
             startActivity(intent)
-
         }
+
+//        binding.listNews.setOnItemClickListener{parent,view,p1,id->
+//            val idNews = this.DocumentList.getItem(p1)
+//            val intent = Intent(requireActivity(), DetailNewsActivity::class.java)
+//            intent.putExtra("this_news" , "$idNews")
+//            startActivity(intent)
+//        }
+
 
 
         return binding.root
     }
+
+    private lateinit var adapter : ListAdapter
+//    fun listDataDocs(){
+//        val cursor : Cursor = db.query("docs", arrayOf("nomor","judul"), null, null, null, null, "tanggal asc")
+//        binding.listNewDocs.adapter = adapter
+//    }
+
+//    override fun onStart() {
+//        super.onStart()
+//        listDataDocs()
+//    }
 
     companion object {
         /**

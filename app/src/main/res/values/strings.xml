@@ -22,5 +22,17 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="title">JDIH DPRD Kota Kediri</string>
+    <string name="dokumen">Dokumen</string>
+    <string name="lainnya">Lainnya</string>
+    <string name="beranda">Beranda</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="profile">Profile</string>
+    <string name="log_in">Masuk Sebagai Admin</string>
+    <string name="cari">Cari</string>
+    <string name="profil">Profil</string>
+    <string name="add_docs">Tambah Dokumen Produk Hukum</string>
+    <string name="judul">Judul</string>
+    <string name="nomor">Nomor</string>
+    <string name="about">JDIH (Jaringan Dokumentasi dan Informasi Hukum) JDIH adalah suatu jaringan yang menyediakan akses terhadap informasi hukum yang dikelola oleh Kementerian Hukum dan Hak Asasi Manusia Republik Indonesia. JDIH berpusat di Direktorat Jenderal Peraturan Perundang-undangan, Kementerian Hukum dan HAM.</string>
 
 </resources>

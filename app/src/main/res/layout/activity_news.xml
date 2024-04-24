@@ -41,19 +41,13 @@
 
 
             <SearchView
-                android:layout_width="296dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:radius="16dp"
-                android:background="@color/grey">
+                android:elevation="1dp"
+                android:background="@drawable/rounded_background_grey">
 
             </SearchView>
-
-            <ImageButton
-                android:id="@+id/filter_button"
-                android:layout_width="42dp"
-                android:layout_height="match_parent"
-                android:radius="16dp"
-                android:src="@drawable/baseline_filter_list_24"  android:background="@color/teal"   />
         </LinearLayout>
 
         <FrameLayout
@@ -65,10 +59,11 @@
             android:background="@drawable/rounded_background_white"
             >
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/idListNews"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"/>
+                android:layout_margin="16dp"/>
         </FrameLayout>
 
 
