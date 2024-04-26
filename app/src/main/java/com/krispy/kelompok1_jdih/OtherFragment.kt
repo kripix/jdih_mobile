@@ -1,15 +1,22 @@
 package com.krispy.kelompok1_jdih
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.krispy.kelompok1_jdih.databinding.FragmentOtherBinding
+import com.krispy.kelompok1_jdih.util.SharedPrefManager
+import io.grpc.okhttp.internal.proxy.Request
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +32,8 @@ class OtherFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var binding: FragmentOtherBinding
+    lateinit var binding: FragmentOtherBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,6 +42,7 @@ class OtherFragment : Fragment() {
         }
     }
 
+    private lateinit var sharedPrefManager: SharedPrefManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +61,18 @@ class OtherFragment : Fragment() {
             val view = LayoutInflater.from(requireContext()).inflate(R.layout.login_sheet, null)
             val btnClose = view.findViewById<Button>(R.id.btn_close)
             val btnLogin = view.findViewById<Button>(R.id.btn_login)
+            val uName = view.findViewById<EditText>(R.id.ed_user_name)
+            val pWord = view.findViewById<EditText>(R.id.ed_user_pass)
+            val togglePass = view.findViewById<Button>(R.id.cb_toggle_pass)
+            sharedPrefManager = SharedPrefManager(requireContext())
 
+            togglePass.setOnClickListener {
+                if (pWord.inputType == 129) {
+                    pWord.inputType = 143
+                } else {
+                    pWord.inputType = 129
+                    }
+            }
             btnClose.setOnClickListener {
                 dialog.dismiss()
             }
@@ -63,23 +83,34 @@ class OtherFragment : Fragment() {
 
 
             btnLogin.setOnClickListener{
-                val intent = Intent(requireActivity(), MainActivityAdm::class.java)
-                startActivity(intent)
+                val username = uName.text.toString().trim()
+                val password = pWord.text.toString().trim()
+
+                if (isValidLogin(username, password)) {
+                    sharedPrefManager.setLoggedIn(true)  // Set login state
+                    sharedPrefManager.setUsername(username) // Optional: Store username
+                    val intent = Intent(requireActivity(), MainActivityAdm::class.java)
+                    startActivity(intent)
+                    Toast.makeText(requireContext(), "Login berhasil", Toast.LENGTH_SHORT).show()
+                    requireActivity().finish()  // Optionally, finish the LoginActivity
+                } else if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+                    Toast.makeText(context, "Harap Masukkan Username dan Password", Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    Toast.makeText(context, "Username atau Password Salah", Toast.LENGTH_SHORT).show()
+                }
             }
         }
         return binding.root
     }
 
+    private fun isValidLogin(username: String, password: String): Boolean {
+        // Implement your validation logic here (e.g., check against a database)
+        return username == "admin" && password == "admin123" // Replace with your logic
+    }
+
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment OtherFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             OtherFragment().apply {

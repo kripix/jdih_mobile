@@ -54,7 +54,7 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="10dp"
-                android:text="PERDA"
+                android:text="PUTUSAN"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
@@ -81,35 +81,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
             <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="15dp"
-                android:text="Nomor Tempat"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="321dp"
-                android:layout_height="37dp"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="10dp"
-                android:text="082298420850"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-            <TextView
                 android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="15dp"
-                android:text="Penetapan"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="36dp"
+                android:text="Tanggal Penetapan"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
             <TextView
                 android:id="@+id/textView19"
@@ -117,7 +96,7 @@
                 android:layout_height="39dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="10dp"
-                android:text="Tidak Peduli"
+                android:text="-"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView18" />
@@ -138,7 +117,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="10dp"
-                android:text="Wes gak berlaku"
+                android:text="Berlaku"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView20" />

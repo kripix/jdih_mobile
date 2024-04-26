@@ -10,6 +10,7 @@
     tools:context=".AddDocsActivity">
 
     <TextView
+        android:id="@+id/docs_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
@@ -69,7 +70,7 @@
                 android:layout_marginTop="16dp"
                 android:ems="10"
                 android:paddingStart="8dp"
-                android:text="Tanggal ditetapkan"
+                android:text="Waktu penetapan"
                 android:textColor="@color/white"
                 android:backgroundTint="@android:color/holo_purple"
                 app:layout_constraintStart_toStartOf="parent"
@@ -144,7 +145,7 @@
                 android:layout_width="120dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="19dp"
-                android:text="tgl"
+                android:text="Waktu"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/btnTgl"

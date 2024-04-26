@@ -7,13 +7,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.sidesheet.SideSheetDialog
+import com.krispy.kelompok1_jdih.databinding.ActivityDetailDocsBinding
 import com.krispy.kelompok1_jdih.databinding.FragmentDataDocsBinding
 import com.krispy.kelompok1_jdih.room.Dokumen
 import com.krispy.kelompok1_jdih.room.DokumenDB
@@ -39,11 +45,21 @@ class DataDocsFragment : Fragment() {
     private var param2: String? = null
 
     lateinit var binding : FragmentDataDocsBinding
+    val arrayJudul = arrayOf("Artikel A", "Artikel B", "Artikel B", "Putusan A", "Putusan B", "Naskah A", "Naskah B", "PUU A", "PUU B")
 
     val db by lazy { DokumenDB(this.requireContext()) }
     lateinit var dokumenAdapter : DokumenAdapter
-    private var dokumenId:Int = 0
+    lateinit var adapterAuto: ArrayAdapter<String>
 
+
+    // creating array adapter for listview
+    lateinit var listAdapter: ArrayAdapter<String>
+
+    // creating array list for listview
+    lateinit var programmingLanguagesList: ArrayList<String>;
+
+    // creating variable for searchview
+    lateinit var searchView: SearchView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -60,7 +76,7 @@ class DataDocsFragment : Fragment() {
         binding = FragmentDataDocsBinding.inflate(inflater, container, false)
         setupRecyclerView()
         binding.filterDocs.setOnClickListener {
-            val dialog = BottomSheetDialog(requireContext())
+            val dialog = SideSheetDialog(requireContext())
             val view = LayoutInflater.from(requireContext()).inflate(R.layout.filter_docs, null)
             val btnClose = view.findViewById<Button>(R.id.idBtnDismiss)
             btnClose.setOnClickListener {
@@ -70,11 +86,17 @@ class DataDocsFragment : Fragment() {
             dialog.setContentView(view)
             dialog.show()
         }
-        binding.searchDocs.setOnClickListener {
 
+        val viewContext = binding.autoSearchDocs.context
+        val adapterAuto = viewContext?.let {
+            ArrayAdapter(it, android.R.layout.simple_list_item_1, arrayJudul)
+        }
+        if (adapterAuto != null) {
+            binding.autoSearchDocs.setAdapter(adapterAuto)
+        } else {
+            // Handle the case where context is null (e.g., show an error message)
         }
 
-        setupListener()
         setupRecyclerView()
         return binding.root
 
@@ -95,21 +117,13 @@ class DataDocsFragment : Fragment() {
     }
 
 
-    private fun setupListener(){
-        // Cari FloatingActionButton di MainActivity dan atur listener
-        val Activity = activity as? MainActivityAdm // Pastikan activity adalah MainActivity
-        Activity?.findViewById<FloatingActionButton>(R.id.fab)?.setOnClickListener {
-            // Panggil intentEdit dari MainActivity
-            Activity.intentEdit(constant.TYPE_CREATE, 0)
-        }
-    }
-
     private fun setupRecyclerView(){
         dokumenAdapter = DokumenAdapter(
             arrayListOf(),
             object : DokumenAdapter.OnAdapterListener {
                 override fun onClick(dokumen: Dokumen) {
-                    intentEdit(constant.TYPE_READ, dokumen.id)
+                    val intent = Intent(requireActivity(), DetailDocsActivity::class.java)
+                    startActivity(intent)
                 }
                 override fun onUpdate(dokumen: Dokumen) {
                     intentEdit(constant.TYPE_UPDATE, dokumen.id)

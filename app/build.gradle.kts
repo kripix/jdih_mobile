@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.androidx.room.common)
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     kapt("androidx.room:room-compiler:2.6.1")
 
     testImplementation(libs.junit)

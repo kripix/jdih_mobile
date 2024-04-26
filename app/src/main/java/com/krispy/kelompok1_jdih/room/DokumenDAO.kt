@@ -2,6 +2,7 @@ package com.krispy.kelompok1_jdih.room
 
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DokumenDAO {
@@ -20,6 +21,9 @@ interface DokumenDAO {
 
     @Query("SELECT * FROM dokumen WHERE tipe =:judulDokumen")
     suspend fun getDokumenByJudul(judulDokumen: String) : List<Dokumen>
+
+    @Query("SELECT judul FROM dokumen WHERE judul LIKE '%' || :judulDokumen || '%' ORDER BY judul ASC LIMIT 5")
+    fun getDokumenSuggestions(judulDokumen: String): Flow<List<String>>
 
     @Query("SELECT * FROM dokumen WHERE tipe =:tipeDokumen AND status=:statusDokumen")
     suspend fun getDokumenByFilter(tipeDokumen: String, statusDokumen:String) : List<Dokumen>

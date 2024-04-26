@@ -1,10 +1,14 @@
 package com.krispy.kelompok1_jdih
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.krispy.kelompok1_jdih.databinding.FragmentAboutBinding
+import com.krispy.kelompok1_jdih.databinding.FragmentAccountBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,7 +24,7 @@ class AboutFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    lateinit var binding : FragmentAboutBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,7 +38,14 @@ class AboutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about, container, false)
+        binding = FragmentAboutBinding.inflate(layoutInflater)
+        binding.button77.setOnClickListener {
+            val myIg = "https://jdihn.go.id/"
+            val intentIg = Intent(Intent.ACTION_VIEW, Uri.parse(myIg))
+            startActivity(intentIg)
+        }
+        return binding.root
+
     }
 
     companion object {

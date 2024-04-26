@@ -1,5 +1,7 @@
 package com.krispy.kelompok1_jdih
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -10,10 +12,14 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.krispy.kelompok1_jdih.databinding.ActivityMainAdmBinding
 import com.krispy.kelompok1_jdih.room.constant
+import com.krispy.kelompok1_jdih.util.SharedPrefManager
 
 class MainActivityAdm : AppCompatActivity() {
     private lateinit var binding: ActivityMainAdmBinding
-    lateinit var db: SQLiteDatabase
+
+
+    private lateinit var sharedPrefManager: SharedPrefManager
+    private var username: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +32,12 @@ class MainActivityAdm : AppCompatActivity() {
             insets
         }
 
-        db = DBOpenHelper(this).writableDatabase
+        sharedPrefManager = SharedPrefManager(this)
+        if (!sharedPrefManager.isLoggedIn()) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish() // Optionally finish MainActivity if user isn't logged in
+        }
 
         //bottom navigation
         binding.bottomNavigationView.background = null
@@ -36,21 +47,30 @@ class MainActivityAdm : AppCompatActivity() {
         //fab
         binding.fab.setOnClickListener {
             val alertDialog = AlertDialog.Builder(this)
+                .setTitle("Pilih Tindakan") // Set dialog box title (optional)
+
             val listItems = arrayOf("Tambah Produk Hukum", "Tambah Berita")
-            fun navigateToActivity(position: Int) {
-                val intent = when (position) {
-                    0 -> Intent(this, AddDocsActivity::class.java)
-                    1 -> Intent(this, AddNewsActivity::class.java)
-                    else -> throw IllegalArgumentException("Invalid option selected")
+
+            alertDialog.setSingleChoiceItems(listItems, -1) { dialog, which ->
+                when (which) {
+                    0 -> {
+                        // Handle "Tambah Produk Hukum" selection
+                        intentEdit(constant.TYPE_CREATE, 0) // Assuming intentEdit is defined elsewhere
+                        dialog.dismiss()
+                    }
+                    1 -> {
+                        // Handle "Tambah Berita" selection
+                        val intent = Intent(this, AddNewsActivity::class.java)
+                        startActivity(intent)
+                        dialog.dismiss()
+                    }
+                    else -> {
+                        // Handle unexpected selection (optional)
+                        dialog.dismiss()
+                    }
                 }
-                startActivity(intent)
             }
-            alertDialog.setSingleChoiceItems(listItems, checkedItem[0]) { dialog, which ->
-                checkedItem[0] = which
-                navigateToActivity(which)
-                dialog.dismiss()
-                checkedItem[0] = -2
-            }
+
             val customAlertDialog = alertDialog.create()
             customAlertDialog.show()
         }
@@ -80,9 +100,6 @@ class MainActivityAdm : AppCompatActivity() {
 
     }
 
-    fun getDbObject():SQLiteDatabase{
-        return db
-    }
 
     private fun replaceFragment(fragment: Fragment){
         val fragmentManager = supportFragmentManager
@@ -96,5 +113,6 @@ class MainActivityAdm : AppCompatActivity() {
         startActivity(intent)
 
     }
+
 
 }

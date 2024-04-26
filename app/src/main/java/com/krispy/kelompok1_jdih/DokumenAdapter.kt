@@ -1,14 +1,19 @@
 package com.krispy.kelompok1_jdih
 
-import com.krispy.kelompok1_jdih.room.Dokumen
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.recyclerview.widget.RecyclerView
+import com.krispy.kelompok1_jdih.room.Dokumen
 
-class DokumenAdapter (var dokumen: ArrayList<Dokumen>, private var listener: OnAdapterListener) :
+class DokumenAdapter (
+    var dokumen: ArrayList<Dokumen>,
+    private var listener: OnAdapterListener) :
     RecyclerView.Adapter<DokumenAdapter.DokumenViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DokumenViewHolder {
@@ -21,6 +26,8 @@ class DokumenAdapter (var dokumen: ArrayList<Dokumen>, private var listener: OnA
                 )
         )
     }
+
+
     override fun getItemCount() = dokumen.size
     override fun onBindViewHolder(holder: DokumenViewHolder, position: Int) {
         val dokumen = dokumen[position]
@@ -46,4 +53,7 @@ class DokumenAdapter (var dokumen: ArrayList<Dokumen>, private var listener: OnA
         fun onUpdate(dokumen: Dokumen)
         fun onDelete(dokumen: Dokumen)
     }
+
+
+
 }

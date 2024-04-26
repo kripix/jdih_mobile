@@ -33,23 +33,35 @@
             android:orientation="horizontal">
 
 
-            <SearchView
-                android:id="@+id/searchDocs"
+<!--            <SearchView-->
+<!--                android:id="@+id/searchDocs"-->
+<!--                android:layout_width="256dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                android:radius="16dp"-->
+<!--                android:background="@drawable/rounded_background_grey"-->
+<!--                android:queryHint="Search"-->
+<!--                android:textColor="@color/black" />-->
+
+            <AutoCompleteTextView
+                android:id="@+id/autoSearchDocs"
                 android:layout_width="256dp"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:layout_marginEnd="24dp"
                 android:radius="16dp"
                 android:background="@drawable/rounded_background_grey"
                 android:queryHint="Search"
-                android:textColor="@color/black"
-                />
+                android:hint="Cari"
+                android:paddingLeft="16dp"
+                android:textColor="@color/black" />
 
             <ImageButton
                 android:id="@+id/filterDocs"
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/baseline_filter_list_24"
-                android:background="@drawable/rounded_background_teal"   />
+                android:background="@drawable/rounded_background_teal"
+                />
         </LinearLayout>
 
         <FrameLayout

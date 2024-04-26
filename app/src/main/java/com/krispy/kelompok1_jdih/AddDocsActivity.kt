@@ -2,6 +2,7 @@ package com.krispy.kelompok1_jdih
 
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -67,20 +68,42 @@ class AddDocsActivity : AppCompatActivity() {
         day = cal.get(Calendar.DAY_OF_MONTH)
         hours = cal.get(Calendar.HOUR)
         minutes = cal.get(Calendar.MINUTE)
-        binding.tvTgl.text = "tanggal $day/${month + 1}/$selectedYear"
 
         // Set listener for date button
         binding.btnTgl.setOnClickListener {
+            // Create and show the date picker dialog
             val calendar = Calendar.getInstance()
             val datePickerDialog = DatePickerDialog(this,
                 { _, year, monthOfYear, dayOfMonth ->
-                    tgl = String.format("%02d/%02d/%d", year, monthOfYear + 1, dayOfMonth)
-                    binding.tvTgl.text = tgl
-                },
-                calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+                    var selectedDate = String.format("%02d/%02d/%d", year, monthOfYear + 1, dayOfMonth)
+                    // Store the selected date in a variable
+                    selectedDate = selectedDate
 
+                    // Create and show the time picker dialog
+                    val timePickerDialog = TimePickerDialog(this,
+                        { _, hourOfDay, minute ->
+                            // Format the selected time
+                            val selectedTime = String.format("%02d:%02d", hourOfDay, minute)
+
+                            // Combine the selected date and time into a single string
+                            tgl = "$selectedDate $selectedTime"
+
+                            // Update the text view with the combined date and time
+                            binding.tvTgl.text = tgl
+                        },
+                        calendar.get(Calendar.HOUR_OF_DAY),
+                        calendar.get(Calendar.MINUTE),
+                        false // Use 24-hour time format
+                    )
+                    timePickerDialog.show()
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            )
             datePickerDialog.show()
         }
+
 
         // Set listener for radio group
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -121,15 +144,18 @@ class AddDocsActivity : AppCompatActivity() {
     private fun setupView() {
         binding.btnSimpan.visibility = View.VISIBLE
         binding.btnUpdate.visibility = View.GONE
+        binding.docsHead.text = "Tambah Produk Hukum"
         when (intentType()) {
             constant.TYPE_READ -> {
                 binding.btnSimpan.visibility = View.GONE
                 binding.btnUpdate.visibility = View.GONE
+                binding.docsHead.text = "Detail Produk Hukum"
                 getDokumen()
             }
             constant.TYPE_UPDATE -> {
                 binding.btnSimpan.visibility = View.GONE
                 binding.btnUpdate.visibility = View.VISIBLE
+                binding.docsHead.text = "Update Produk Hukum"
                 getDokumen()
             }
         }
@@ -141,9 +167,10 @@ class AddDocsActivity : AppCompatActivity() {
             judul = binding.editJudul.text.toString()
             CoroutineScope(Dispatchers.IO).launch {
                 db.DokumenDAO().addDokumen(
-                    Dokumen(0, tipe, judul, tgl, status, file)
+                    Dokumen(0, tipe, judul,tgl, status, file)
                 )
             }
+            Toast.makeText(this, "Data Berhasil disimpan", Toast.LENGTH_SHORT).show()
             finish()
         }
         binding.btnUpdate.setOnClickListener {

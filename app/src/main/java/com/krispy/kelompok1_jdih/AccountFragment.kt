@@ -6,7 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
 import com.krispy.kelompok1_jdih.databinding.FragmentAccountBinding
+import com.krispy.kelompok1_jdih.util.SharedPrefManager
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,6 +27,8 @@ class AccountFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     lateinit var binding : FragmentAccountBinding
+
+    private lateinit var sharedPrefManager: SharedPrefManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -39,12 +45,39 @@ class AccountFragment : Fragment() {
         binding = FragmentAccountBinding.inflate(layoutInflater)
 
 
-        binding.btnLogout.setOnClickListener {
-            val intent = Intent(requireActivity(), MainActivity::class.java)
-            startActivity(intent)
+        binding.idMinimenu.setOnClickListener {
+            showPopupMenu(binding.idMinimenu)
         }
         return binding.root
     }
+
+    private fun showPopupMenu(view: View) {
+        val popupMenu = PopupMenu(requireContext(), view)
+        popupMenu.menuInflater.inflate(R.menu.pop_up_account, popupMenu.menu)
+        sharedPrefManager = SharedPrefManager(requireContext())
+
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.edit_profile -> {
+                    Toast.makeText(requireContext(), "Edit Profile", Toast.LENGTH_SHORT).show()
+                    true
+                }
+
+                R.id.logout -> {
+                    sharedPrefManager.setLoggedIn(false)
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(intent)
+                    Toast.makeText(requireContext(), "Logout berhasil", Toast.LENGTH_SHORT).show()
+                    requireActivity().finish()
+                    true
+                }
+
+                else -> false
+            }
+        }
+        popupMenu.show()
+    }
+
 
     companion object {
         /**
