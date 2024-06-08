@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingHorizontal="10dp"
+    tools:context=".ui.home.dokumen.DetailDocsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/baseline_arrow_back_black_24" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Detail Produk Hukum"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:typeface="serif"
+            android:gravity="center" />
+
+        <ImageButton
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/baseline_share_24" />
+
+    </LinearLayout>
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:layout_marginVertical="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tipe Dokumen : "
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/tv_tipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tipe Dokumen"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:layout_marginVertical="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Judul : "
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/tv_judul_dokumen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Judul Dokumen"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:layout_marginVertical="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sumber : "
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/tv_sumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sumber"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:layout_marginVertical="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Penandatanganan : "
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/tv_ptd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Penandatanganan"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:layout_marginVertical="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tempat Penetapan :"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/tv_penetapan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tempat Penetapan"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:layout_marginVertical="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tgl Penetepanan :"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/tv_tgl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tanggal Penetapan"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:layout_marginVertical="8dp" />
+
+    <Button
+        android:id="@+id/btn_unduh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="16dp"
+        android:drawableLeft="@drawable/baseline_file_download_24"
+        android:text="Unduh File"
+        android:textSize="18sp"
+        android:padding="8dp" />
+
+</LinearLayout>
