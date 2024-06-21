@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/purple"
     android:foregroundTint="#000000"
-    tools:context=".ui.admin.dokumen.cud.AddDocsActivity">
+    tools:context=".ui.home.dokumen.DokumenTambahActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -30,6 +30,7 @@
             android:src="@drawable/baseline_arrow_back_24" />
 
         <TextView
+            android:id="@+id/title_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -63,11 +64,12 @@
                 android:id="@+id/sp_tipe"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:background="#FFFFFF" />
+                android:background="@drawable/outline_black" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_judul"
@@ -182,11 +184,11 @@
             <RadioGroup
                 android:id="@+id/rg_status"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/outline_black"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:paddingHorizontal="8dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
@@ -201,6 +203,8 @@
                     android:id="@+id/rb_berlaku"
                     android:layout_width="128dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
                     android:text="Berlaku"
                     android:textColor="@color/black" />
 
@@ -208,7 +212,9 @@
                     android:id="@+id/rb_tidak_berlaku"
                     android:layout_width="128dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="Tidak Berlaku"
+                    android:gravity="center_vertical"
                     android:textColor="@color/black" />
 
             </RadioGroup>
@@ -216,11 +222,11 @@
             <RadioGroup
                 android:id="@+id/rg_sifat"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/outline_black"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:paddingHorizontal="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -236,6 +242,7 @@
                     android:id="@+id/rb_public"
                     android:layout_width="128dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:paddingEnd="16dp"
                     android:text="Public"
                     android:textColor="@color/black" />
@@ -244,12 +251,12 @@
                     android:id="@+id/rb_private"
                     android:layout_width="128dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:paddingEnd="16dp"
                     android:text="Private"
                     android:textColor="@color/black" />
 
             </RadioGroup>
-
 
             <Button
                 android:id="@+id/btn_simpan"
@@ -257,19 +264,8 @@
                 android:layout_height="56dp"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/purple"
-                android:text="Upload Dokumen"
+                android:text="SIMPAN"
                 android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/btn_update"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@color/purple"
-                android:text="PERBARUI"
-                android:textColor="@color/white"
-                android:visibility="gone" />
-
         </LinearLayout>
     </ScrollView>
 

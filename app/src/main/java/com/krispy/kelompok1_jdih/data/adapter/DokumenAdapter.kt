@@ -1,58 +1,52 @@
 package com.krispy.kelompok1_jdih.data.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.krispy.kelompok1_jdih.R
-import com.krispy.kelompok1_jdih.data.room.Dokumen
+import com.krispy.kelompok1_jdih.data.listener.DokumenClickListener
+import com.krispy.kelompok1_jdih.data.model.DokumenModel
+import com.krispy.kelompok1_jdih.databinding.ItemDokumenBinding
 
-class DokumenAdapter (
-    var dokumen: ArrayList<Dokumen>,
-    private var listener: OnAdapterListener
-) :
-    RecyclerView.Adapter<DokumenAdapter.DokumenViewHolder>(){
+class DokumenAdapter(
+    private val list: ArrayList<DokumenModel.Data>,
+    private val listener: DokumenClickListener
+) : RecyclerView.Adapter<DokumenAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DokumenViewHolder {
-        return DokumenViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(
-                    R.layout.adapter_dokumen,
-                    parent,
-                    false
-                )
-        )
-    }
-
-
-    override fun getItemCount() = dokumen.size
-    override fun onBindViewHolder(holder: DokumenViewHolder, position: Int) {
-        val dokumen = dokumen[position]
-        holder.view.findViewById<TextView>(R.id.text_title).text = dokumen.judul
-
-        holder.view.findViewById<TextView>(R.id.text_title).setOnClickListener {
-            listener.onClick(dokumen)
-        }
-        holder.view.findViewById<ImageView>(R.id.icon_edit).setOnClickListener {
-            listener.onUpdate(dokumen)
-        }
-        holder.view.findViewById<ImageView>(R.id.icon_delete).setOnClickListener {
-            listener.onDelete(dokumen)
+    class ViewHolder(
+        private val binding: ItemDokumenBinding,
+        private val listener: DokumenClickListener
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(data: DokumenModel.Data) {
+            with(binding) {
+                tvTgl.text = data.tgl_penetapan
+                tvStatus.text = data.status
+                tvTipe.text = data.tipe
+                tvJudul.text = data.judul
+                itemDokumen.setOnClickListener {
+                    listener.onClick(data)
+                }
+            }
+            Log.d("DokumenAdapter", "Data: $data")
         }
     }
-    class DokumenViewHolder(val view: View) : RecyclerView.ViewHolder(view)
-    fun setData(newList: List<Dokumen>) {
-        dokumen.clear()
-        dokumen.addAll(newList)
-    }
-    interface OnAdapterListener {
-        fun onClick(dokumen: Dokumen)
-        fun onUpdate(dokumen: Dokumen)
-        fun onDelete(dokumen: Dokumen)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val from = LayoutInflater.from(parent.context)
+        val binding = ItemDokumenBinding.inflate(from, parent, false)
+        return ViewHolder(binding, listener)
     }
 
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(list[position])
+    }
 
+    override fun getItemCount() = list.size
 
+    fun setData(data: List<DokumenModel.Data>) {
+        list.clear()
+        list.addAll(data)
+        Log.d("CekAdapter", "Data set: ${list.size} items")
+        notifyDataSetChanged()
+    }
 }

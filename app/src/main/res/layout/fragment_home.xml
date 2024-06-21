@@ -6,7 +6,7 @@
     android:background="@color/purple"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.main.HomeFragment" >
+    tools:context=".ui.home.HomeFragment" >
 
     <TextView
         android:id="@+id/textView"
@@ -37,7 +37,7 @@
             <FrameLayout
                 android:id="@+id/frameLayout"
                 android:layout_width="match_parent"
-                android:layout_height="132dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/rounded_background_white"
                 android:elevation="4dp">
@@ -45,8 +45,7 @@
                 <VideoView
                     android:id="@+id/videoView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@raw/opening" />
+                    android:layout_height="198dp" />
 
             </FrameLayout>
 
@@ -93,7 +92,7 @@
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_new_docs"
+                        android:id="@+id/rv_dokumen"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         tools:listitem="@layout/item_dokumen" />
@@ -104,7 +103,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="720dp"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/rounded_background_white"
@@ -127,7 +126,7 @@
                         android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_new_news"
+                        android:id="@+id/rv_berita"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         tools:listitem="@layout/item_berita" />

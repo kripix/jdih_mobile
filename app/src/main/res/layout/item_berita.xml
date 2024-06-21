@@ -2,63 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_berita"
     android:layout_width="match_parent"
     android:layout_height="72dp"
-    android:layout_marginVertical="4dp"
-    android:background="@drawable/rounded_background_white"
-    android:elevation="7dp"
+    android:layout_marginVertical="2dp"
+    android:layout_marginHorizontal="10dp"
+    android:background="@drawable/outline_black"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:paddingHorizontal="10dp">
 
 
     <ImageView
         android:id="@+id/iv_cover"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_gravity="center"
         android:scaleType="centerCrop"
         android:layout_marginEnd="10dp"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/tv_judul"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_tgl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tanggal"
-            android:textColor="@color/gray"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/tv_judul"
-            android:layout_width="223dp"
-            android:layout_height="wrap_content"
-            android:text="Implementasi apa ini entahlah"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            />
-
-
-    </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/btn_edit"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_gravity="center"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        app:srcCompat="@drawable/baseline_edit_24" />
-
-    <ImageButton
-        android:id="@+id/btn_hapus"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_gravity="center"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        app:srcCompat="@drawable/baseline_delete_24" />
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:paddingTop="6dp"
+        android:justificationMode="inter_word"
+        />
 
 </LinearLayout>

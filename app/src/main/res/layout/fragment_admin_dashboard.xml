@@ -6,7 +6,7 @@
     android:background="@color/purple"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.admin.main.DashboardFragment" >
+    tools:context=".ui.admin.DashboardFragment" >
 
     <TextView
         android:id="@+id/textView"
@@ -20,156 +20,43 @@
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="8dp"/>
 
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="72dp"
-        android:elevation="5dp"
-        android:background="@drawable/rounded_background_grey">
+        android:layout_marginTop="56dp"
+        android:background="@drawable/rounded_background_white"
+        android:elevation="4dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background_grey"
+            android:elevation="5dp"
+            android:orientation="vertical">
 
             <FrameLayout
                 android:id="@+id/frameLayout"
                 android:layout_width="match_parent"
-                android:layout_height="132dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/rounded_background_white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 android:elevation="4dp">
 
-                <LinearLayout
+                <VideoView
+                    android:id="@+id/videoView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    >
-
-                    <TextView
-                        android:id="@+id/textView14"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:text="   Statistik"
-                        android:padding="8dp"
-                        android:textColor="@color/black"
-                        android:drawableLeft="@drawable/baseline_insights_24"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_gravity="center">
-
-                        <LinearLayout
-                            android:layout_width="84dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/jumlah_puu"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="234"
-                                android:textSize="32sp"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"/>
-
-                            <TextView
-                                android:id="@+id/textView11"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="PUU"
-                                android:textAlignment="center"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="84dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/jumlah_monografi"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="66"
-                                android:textSize="32sp"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"/>
-
-                            <TextView
-                                android:id="@+id/textView9"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Naskah Akademik"
-                                android:textAlignment="center"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="84dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/jumlah_artikel"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="54"
-                                android:textSize="32sp"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"/>
-
-                            <TextView
-                                android:id="@+id/textView13"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Artikel"
-                                android:textAlignment="center"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="84dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/jumlah_putusan"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="128"
-                                android:textSize="32sp"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                />
-
-                            <TextView
-                                android:id="@+id/textView7"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Putusan"
-                                android:textAlignment="center"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
+                    android:layout_height="198dp" />
 
             </FrameLayout>
 
             <FrameLayout
                 android:id="@+id/frameLayout2"
                 android:layout_width="match_parent"
-                android:layout_height="216dp"
+                android:layout_height="242dp"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="16dp"
-                android:elevation="4dp"
                 android:background="@drawable/rounded_background_white"
-                app:layout_constraintEnd_toEndOf="@+id/frameLayout"
-                app:layout_constraintStart_toStartOf="@+id/frameLayout"
-                app:layout_constraintTop_toBottomOf="@+id/frameLayout">
+                android:elevation="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -178,13 +65,13 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="36dp"
                         android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/textView18"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="36dp"
                             android:drawableLeft="@drawable/baseline_book_24"
                             android:padding="8dp"
                             android:text="  Produk Hukum Terbaru"
@@ -193,82 +80,60 @@
                             android:textStyle="bold" />
 
                         <Button
-                            android:id="@+id/btn_dataDocs"
-                            android:layout_width="56dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:id="@+id/btn_listDocs"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:background="@android:color/transparent"
                             android:text="Lihat semua"
                             android:textColor="@color/black"
-                            android:textSize="10sp"
-                            android:background="@android:color/transparent"/>
+                            android:textSize="10sp" />
 
 
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_new_docs"
+                        android:id="@+id/rv_dokumen"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="8dp"/>
+                        tools:listitem="@layout/item_dokumen" />
+
                 </LinearLayout>
 
             </FrameLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="216dp"
+                android:layout_height="720dp"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="16dp"
-                android:elevation="4dp"
                 android:background="@drawable/rounded_background_white"
-                app:layout_constraintEnd_toEndOf="@+id/frameLayout"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/frameLayout"
-                app:layout_constraintTop_toBottomOf="@+id/frameLayout2">
+                android:elevation="4dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/head_news"
-                            android:layout_width="230dp"
-                            android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/baseline_newspaper_24"
-                            android:padding="8dp"
-                            android:text="  Berita Terbaru"
-                            android:textColor="@color/black"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                        <Button
-                            android:id="@+id/btn_dataNews"
-                            android:layout_width="56dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Lihat semua"
-                            android:textColor="@color/black"
-                            android:textSize="10sp"
-                            android:background="@android:color/transparent"/>
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/head_news"
+                        android:layout_width="230dp"
+                        android:layout_height="36dp"
+                        android:drawableLeft="@drawable/baseline_newspaper_24"
+                        android:padding="8dp"
+                        android:text="  Berita Terbaru"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_new_news"
+                        android:id="@+id/rv_berita"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="8dp"/>
-
+                        tools:listitem="@layout/item_berita" />
                 </LinearLayout>
             </FrameLayout>
 
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

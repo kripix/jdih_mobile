@@ -1,30 +1,23 @@
 package com.krispy.kelompok1_jdih.ui.admin
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import com.krispy.kelompok1_jdih.ui.home.MainActivity
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.krispy.kelompok1_jdih.R
 import com.krispy.kelompok1_jdih.databinding.ActivityMainAdmBinding
-import com.krispy.kelompok1_jdih.data.room.constant
-import com.krispy.kelompok1_jdih.ui.admin.berita.cud.AddNewsActivity
-import com.krispy.kelompok1_jdih.ui.admin.dokumen.cud.AddDocsActivity
-import com.krispy.kelompok1_jdih.data.util.SharedPrefManager
-import com.krispy.kelompok1_jdih.ui.admin.dokumen.cud.DataDocsFragment
+import com.krispy.kelompok1_jdih.ui.home.berita.BeritaTambahActivity
+import com.krispy.kelompok1_jdih.ui.home.dokumen.DokumenTambahActivity
 import com.krispy.kelompok1_jdih.ui.admin.profile.AccountFragment
-import com.krispy.kelompok1_jdih.ui.admin.lainnya.AboutFragment
-import com.krispy.kelompok1_jdih.ui.admin.main.DashboardFragment
+import com.krispy.kelompok1_jdih.ui.home.dokumen.DokumenDaftarFragment
+import com.krispy.kelompok1_jdih.ui.home.lainnya.OtherFragment
 
-class MainActivityAdm : AppCompatActivity() {
+class MainActivityAdm : AppCompatActivity(), DashboardFragment.OnFragmentInteractionListener {
     private lateinit var binding: ActivityMainAdmBinding
-
-
-    private lateinit var sharedPrefManager: SharedPrefManager
-    private var username: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,87 +30,55 @@ class MainActivityAdm : AppCompatActivity() {
             insets
         }
 
-        sharedPrefManager = SharedPrefManager(this)
-        if (!sharedPrefManager.isLoggedIn()) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish() // Optionally finish MainActivity if user isn't logged in
-        }
-
-        //bottom navigation
         binding.bottomNavigationView.background = null
-        binding.bottomNavigationView.menu.getItem(2).isEnabled = false
-        val checkedItem = intArrayOf(-2)
 
-        //fab
         binding.fab.setOnClickListener {
-            val alertDialog = AlertDialog.Builder(this)
-                .setTitle("Pilih Tindakan") // Set dialog box title (optional)
-
-            val listItems = arrayOf("Tambah Produk Hukum", "Tambah Berita")
-
-            alertDialog.setSingleChoiceItems(listItems, -1) { dialog, which ->
-                when (which) {
-                    0 -> {
-                        // Handle "Tambah Produk Hukum" selection
-                        intentEdit(constant.TYPE_CREATE, 0) // Assuming intentEdit is defined elsewhere
-                        dialog.dismiss()
-                    }
-                    1 -> {
-                        // Handle "Tambah Berita" selection
-                        val intent = Intent(this, AddNewsActivity::class.java)
-                        startActivity(intent)
-                        dialog.dismiss()
-                    }
-                    else -> {
-                        // Handle unexpected selection (optional)
-                        dialog.dismiss()
-                    }
-                }
-            }
-
-            val customAlertDialog = alertDialog.create()
-            customAlertDialog.show()
+            setupTambah()
         }
 
         replaceFragment(DashboardFragment())
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.db_icon -> replaceFragment(DashboardFragment())
-                R.id.search_icon -> replaceFragment(DataDocsFragment())
+                R.id.search_icon -> replaceFragment(DokumenDaftarFragment())
                 R.id.account_icon -> replaceFragment(AccountFragment())
-                R.id.settings_icon -> replaceFragment(AboutFragment())
-                else -> {
-                }
+                R.id.settings_icon -> replaceFragment(OtherFragment())
+                else -> {}
             }
             true
         }
+    }
 
+    private fun setupTambah() {
+        val bottomSheetDialog = BottomSheetDialog(this)
+        val view = layoutInflater.inflate(R.layout.bs_tambah, null)
+        bottomSheetDialog.setContentView(view)
+        val tambahDokumen = view.findViewById<Button>(R.id.btn_tambah_dokumen)
+        val tambahBerita = view.findViewById<Button>(R.id.btn_tambah_berita)
 
-        val intent = intent
-        val fragmentName = intent.getStringExtra("list")
-
-        if (fragmentName == "Docs") {
-            binding.bottomNavigationView.selectedItemId = R.id.search_icon
-            replaceFragment(DataDocsFragment())
+        tambahDokumen.setOnClickListener {
+            val intent = Intent(this, DokumenTambahActivity::class.java)
+            startActivity(intent)
+        }
+        tambahBerita.setOnClickListener{
+            val intent = Intent(this, BeritaTambahActivity::class.java)
+            startActivity(intent)
         }
 
-
+        bottomSheetDialog.show()
     }
 
-
-    private fun replaceFragment(fragment: Fragment){
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.container,fragment)
-        fragmentTransaction.commit()
+    override fun onFragmentInteraction(fragment: Fragment) {
+        replaceFragment(fragment)
+        if (fragment is DokumenDaftarFragment) {
+            binding.bottomNavigationView.selectedItemId = R.id.search_icon
+        }
     }
 
-    fun intentEdit(intent_type: Int, idDokumen: Int) {
-        val intent = Intent(this, AddDocsActivity::class.java).putExtra("intent_type", intent_type).putExtra("idDokumen", idDokumen)
-        startActivity(intent)
-
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
-
-
 }

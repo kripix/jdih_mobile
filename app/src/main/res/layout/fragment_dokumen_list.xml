@@ -4,7 +4,7 @@
     android:id="@+id/docs_frag"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.dokumen.DocsFragment"
+    tools:context=".ui.home.dokumen.DokumenDaftarFragment"
     android:background="@color/purple">
 
     <TextView
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="56dp"
-        android:background="@drawable/rounded_background_grey"
+        android:background="@drawable/rounded_background_white"
         android:elevation="5dp"
         android:orientation="vertical">
 
@@ -38,14 +38,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/rounded_background_white"
+                android:background="@drawable/outline_black"
                 android:queryHint="Search"
                 android:radius="16dp"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <ImageButton
-                android:id="@+id/filterDocs"
+                android:id="@+id/btn_filter"
                 android:layout_width="36dp"
                 android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackgroundBorderless"
@@ -62,10 +62,11 @@
             android:layout_margin="10dp">
 
             <LinearLayout
+                android:id="@+id/filter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-
+                android:visibility="gone"
                 android:paddingHorizontal="8dp"
                 android:background="@drawable/rounded_background_white">
 
@@ -104,13 +105,11 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="10dp"
-            android:background=""
             android:elevation="4dp">
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvDocs"
+                android:id="@+id/rv_dokumen"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:listitem="@layout/item_dokumen" />
