@@ -35,6 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/poppins_medium"
             android:text="Tambah Dokumen"
             android:textColor="@color/white"
             android:textSize="18sp"
@@ -63,7 +65,7 @@
             <Spinner
                 android:id="@+id/sp_tipe"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="50dp"
                 android:background="@drawable/outline_black" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -75,6 +77,7 @@
                     android:id="@+id/et_judul"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
                     android:hint="judul" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,6 +90,7 @@
                     android:id="@+id/et_nomor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
                     android:hint="Nomor" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,6 +103,7 @@
                     android:id="@+id/et_sumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
                     android:hint="Sumber" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,6 +116,7 @@
                     android:id="@+id/et_penandatanganan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
                     android:hint="Penandatanganan" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,12 +129,13 @@
                     android:id="@+id/et_tempat_penetapan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
                     android:hint="Tempat Penetapan" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/outline_black"
                 android:orientation="horizontal"
@@ -140,6 +147,7 @@
                     android:layout_height="36dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center_vertical"
                     android:text="Tanggal Penetapan"
                     android:textColor="@color/black"
@@ -153,13 +161,14 @@
                     android:src="@drawable/baseline_more_time_24" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/outline_black"
                 android:orientation="horizontal"
-                android:padding="8dp"
-                android:background="@drawable/outline_black">
+                android:padding="8dp">
 
                 <TextView
                     android:id="@+id/tv_file"
@@ -167,8 +176,10 @@
                     android:layout_height="36dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center_vertical"
-                    android:text="File Dokumen"
+                    android:text="Harap Upload File"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -184,26 +195,30 @@
             <RadioGroup
                 android:id="@+id/rg_status"
                 android:layout_width="wrap_content"
-                android:layout_height="56dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/outline_black"
                 android:orientation="horizontal"
                 android:paddingHorizontal="8dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center_vertical"
-                    android:text="Status :"
+                    android:text="Status  :"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <RadioButton
                     android:id="@+id/rb_berlaku"
-                    android:layout_width="128dp"
+                    android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center_vertical"
                     android:text="Berlaku"
                     android:textColor="@color/black" />
@@ -213,8 +228,9 @@
                     android:layout_width="128dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Tidak Berlaku"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center_vertical"
+                    android:text="Tidak Berlaku"
                     android:textColor="@color/black" />
 
             </RadioGroup>
@@ -222,7 +238,7 @@
             <RadioGroup
                 android:id="@+id/rg_sifat"
                 android:layout_width="wrap_content"
-                android:layout_height="56dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/outline_black"
                 android:orientation="horizontal"
@@ -233,16 +249,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center_vertical"
-                    android:text="Sifat    :"
+                    android:text="Sifat      :"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <RadioButton
                     android:id="@+id/rb_public"
-                    android:layout_width="128dp"
+                    android:layout_width="106dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/poppins"
                     android:paddingEnd="16dp"
                     android:text="Public"
                     android:textColor="@color/black" />
@@ -252,6 +271,7 @@
                     android:layout_width="128dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/poppins"
                     android:paddingEnd="16dp"
                     android:text="Private"
                     android:textColor="@color/black" />
@@ -264,6 +284,7 @@
                 android:layout_height="56dp"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/purple"
+                android:fontFamily="@font/poppins_medium"
                 android:text="SIMPAN"
                 android:textColor="@color/white" />
         </LinearLayout>

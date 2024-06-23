@@ -1,5 +1,6 @@
 package com.krispy.kelompok1_jdih.ui.home.dokumen
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -20,29 +21,20 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DokumenDaftarFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DokumenDaftarFragment : Fragment(), DokumenClickListener {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var binding: FragmentDokumenListBinding
     private lateinit var dokumenAdapter: DokumenAdapter
-
     private val api by lazy { ApiRetrofit().endpoint }
     private var userId: Int = 0
 
     private var originalDokumenList: List<DokumenModel.Data> = listOf()
+    private var currentSearchQuery: String = ""
+    private var currentFilterType: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,36 +48,69 @@ class DokumenDaftarFragment : Fragment(), DokumenClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentDokumenListBinding.inflate(inflater, container, false)
-        dokumenAdapter = DokumenAdapter(arrayListOf(), this)
-        binding.rvDokumen.layoutManager = LinearLayoutManager(context)
-        binding.rvDokumen.adapter = dokumenAdapter
+        initData()
+        initRecyclerView()
         setupListener()
         return binding.root
     }
 
-    override fun onStart(){
+    override fun onStart() {
         super.onStart()
         getDokumen()
     }
 
-    private fun setupListener(){
+    private fun initRecyclerView() {
+        dokumenAdapter = DokumenAdapter(arrayListOf(), this)
+        binding.rvDokumen.layoutManager = LinearLayoutManager(context)
+        binding.rvDokumen.adapter = dokumenAdapter
+    }
+
+    private fun setupListener() {
+        // Search View
         binding.searchDocs.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean = false
             override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let { searchClasses(it) }
+                currentSearchQuery = newText.orEmpty()
+                updateDisplayedDokumen()
                 return true
             }
         })
 
-        binding.btnFilter.setOnClickListener{
+        // Filter Button
+        binding.btnFilter.setOnClickListener {
+            binding.filter.visibility = if (binding.filter.visibility == View.GONE) View.VISIBLE else View.GONE
             if (binding.filter.visibility == View.GONE) {
-                binding.filter.visibility = View.VISIBLE
-            } else {
-                binding.filter.visibility = View.GONE
+                currentFilterType = null
+                updateDisplayedDokumen()
             }
         }
+
+        // Filter Type Buttons
+        binding.btnPeraturan.setOnClickListener { filterByType("Peraturan") }
+        binding.btnMonografi.setOnClickListener { filterByType("Monografi") }
+        binding.btnPutusan.setOnClickListener { filterByType("Putusan") }
+        binding.btnArtikel.setOnClickListener { filterByType("Artikel") }
+    }
+
+    private fun filterByType(type: String) {
+        currentFilterType = type
+        updateDisplayedDokumen()
+    }
+
+    private fun updateDisplayedDokumen() {
+        val filteredList = originalDokumenList.filter { dokumen ->
+            val matchesType = currentFilterType?.let { dokumen.tipe.equals(it, true) } ?: true
+            val matchesQuery = dokumen.judul.contains(currentSearchQuery, true)
+            matchesType && matchesQuery
+        }
+        dokumenAdapter.setData(filteredList)
+    }
+
+    private fun initData() {
+        val sharedPreferences = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        userId = sharedPreferences.getInt("user_id", -1)
+        Log.d("UserID", "userId: $userId")
     }
 
     private fun getDokumen() {
@@ -94,18 +119,18 @@ class DokumenDaftarFragment : Fragment(), DokumenClickListener {
                 if (response.isSuccessful) {
                     response.body()?.dokumen?.let { listData ->
                         originalDokumenList = listData
-                        dokumenAdapter.setData(listData)
-                        Log.d("HomeFragment", "Dokumen data: ${listData}")
+                        updateDisplayedDokumen()
+                        Log.d("DokumenDaftarFragment", "Dokumen data: $listData")
                     } ?: run {
-                        Log.e("HomeFragment", "Empty Dokumen response")
+                        Log.e("DokumenDaftarFragment", "Empty Dokumen response")
                     }
                 } else {
-                    Log.e("HomeFragment", "Error response: ${response.errorBody()?.string()}")
+                    Log.e("DokumenDaftarFragment", "Error response: ${response.errorBody()?.string()}")
                 }
             }
 
             override fun onFailure(call: Call<DokumenModel>, t: Throwable) {
-                Log.e("HomeFragment", "Failed to fetch Dokumen: ${t.message}")
+                Log.e("DokumenDaftarFragment", "Failed to fetch Dokumen: ${t.message}")
             }
         })
     }
@@ -117,13 +142,4 @@ class DokumenDaftarFragment : Fragment(), DokumenClickListener {
         }
         startActivity(intent)
     }
-
-    private fun searchClasses(query: String) {
-        val filteredList = if (query.isEmpty()) originalDokumenList else originalDokumenList.filter { dokumen ->
-            dokumen.judul.contains(query, true)
-        }
-        dokumenAdapter.setData(filteredList)
-    }
-
-
 }

@@ -26,12 +26,22 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="2dp"
             android:layout_weight="1"
+            android:fontFamily="@font/poppins"
             android:text="Detail Produk Hukum"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             android:typeface="serif" />
+
+        <ImageButton
+            android:id="@+id/btn_fzise"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/baseline_format_size_24" />
 
         <ImageButton
             android:id="@+id/btn_more"
@@ -58,6 +68,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Tipe Dokumen : "
             android:textSize="12sp" />
 
@@ -65,6 +76,7 @@
             android:id="@+id/tv_tipe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Tipe Dokumen"
             android:textColor="@color/black"
             android:textSize="18sp" />
@@ -73,12 +85,13 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginVertical="5dp"
+            android:background="@color/black" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Judul : "
             android:textSize="12sp" />
 
@@ -86,21 +99,23 @@
             android:id="@+id/tv_judul_dokumen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:justificationMode="inter_word"
             android:text="Judul Dokumen"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:justificationMode="inter_word"/>
+            android:textSize="18sp" />
 
         <!-- Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/black"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginVertical="5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Nomor : "
             android:textSize="12sp" />
 
@@ -108,20 +123,22 @@
             android:id="@+id/tv_nomor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Nomor Dokumen"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <!-- Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/black"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginVertical="5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Sumber : "
             android:textSize="12sp" />
 
@@ -129,6 +146,7 @@
             android:id="@+id/tv_sumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Sumber"
             android:textColor="@color/black"
             android:textSize="18sp" />
@@ -138,18 +156,20 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/black"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginVertical="5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Penandatanganan : "
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_ptd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Penandatanganan"
             android:textColor="@color/black"
             android:textSize="18sp" />
@@ -159,11 +179,12 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/black"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginVertical="5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Tempat Penetapan :"
             android:textSize="12sp" />
 
@@ -171,6 +192,7 @@
             android:id="@+id/tv_penetapan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Tempat Penetapan"
             android:textColor="@color/black"
             android:textSize="18sp" />
@@ -180,11 +202,12 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/black"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginVertical="5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Tgl Penetepanan :"
             android:textSize="12sp" />
 
@@ -192,6 +215,7 @@
             android:id="@+id/tv_tgl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Tanggal Penetapan"
             android:textColor="@color/black"
             android:textSize="18sp" />
@@ -201,11 +225,12 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/black"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginVertical="5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Status : "
             android:textSize="12sp" />
 
@@ -213,22 +238,24 @@
             android:id="@+id/tv_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/red"
+            android:fontFamily="@font/poppins"
+            android:paddingHorizontal="10dp"
             android:text="Status Dokumen"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:paddingHorizontal="10dp"
-            android:background="@color/red"/>
+            android:textSize="18sp" />
 
         <!-- Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/black"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginVertical="5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Nama file : "
             android:textSize="12sp" />
 
@@ -236,16 +263,17 @@
             android:id="@+id/tv_file"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="File Dokumen"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <!-- Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/black"
-            android:layout_marginVertical="8dp" />
+            android:layout_marginVertical="5dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -274,8 +302,4 @@
                 android:src="@drawable/baseline_share_24" />
         </LinearLayout>
     </LinearLayout>
-
-
-
-
 </LinearLayout>

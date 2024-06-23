@@ -59,10 +59,12 @@ class MainActivityAdm : AppCompatActivity(), DashboardFragment.OnFragmentInterac
         tambahDokumen.setOnClickListener {
             val intent = Intent(this, DokumenTambahActivity::class.java)
             startActivity(intent)
+            bottomSheetDialog.dismiss()
         }
         tambahBerita.setOnClickListener{
             val intent = Intent(this, BeritaTambahActivity::class.java)
             startActivity(intent)
+            bottomSheetDialog.dismiss()
         }
 
         bottomSheetDialog.show()

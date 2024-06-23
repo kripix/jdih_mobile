@@ -32,13 +32,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
             android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_medium"
             android:text="Detail Berita"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             android:typeface="serif" />
+
+        <ImageButton
+            android:id="@+id/btn_fzise"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/baseline_format_size_24" />
 
         <ImageButton
             android:id="@+id/btn_more"
@@ -71,40 +81,40 @@
                 android:id="@+id/tv_tgl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
                 android:text="Tanggal Berita"
                 android:textColor="@color/gray"
-                android:textSize="12sp"
-                />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_judul"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_medium"
                 android:text="Judul Berita"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <ImageView
                 android:id= "@id/iv_cover"
                 android:layout_width="match_parent"
                 android:layout_height="128dp"
                 android:layout_marginTop="8dp"
-                android:scaleType="centerCrop"
+                android:scaleType="center"
                 android:src="@drawable/baseline_image_24" />
 
             <TextView
                 android:id="@+id/tv_isi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Isi Berita"
                 android:layout_marginTop="8dp"
-                android:textColor="@color/black"
-                android:textSize="14sp"
+                android:fontFamily="@font/poppins"
                 android:justificationMode="inter_word"
-                />
+                android:text="Isi Berita"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
         </LinearLayout>
 
 

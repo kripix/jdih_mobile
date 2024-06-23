@@ -15,7 +15,9 @@
             android:id="@+id/btn_close"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:layout_margin="16dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/baseline_close_24" />
 
@@ -23,18 +25,19 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
-            android:layout_marginTop="8dp"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_medium"
             android:text="JDIH DPRD KOTA KEDIRI"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
-
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_gravity="center"
+            android:layout_marginTop="30dp"
             android:src="@drawable/icon_dprd_kediri" />
 
         <FrameLayout
@@ -42,8 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/outline_black">
+            android:layout_marginTop="50dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -72,8 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/outline_black">
+            android:layout_marginTop="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"

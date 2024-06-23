@@ -1,16 +1,27 @@
 package com.krispy.kelompok1_jdih.ui.home.dokumen
 
+import android.Manifest
+import android.app.Activity
 import android.app.AlertDialog
+import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.Settings
 import android.view.View
 import android.widget.ImageView
 import android.widget.PopupMenu
+import android.widget.SeekBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -23,6 +34,7 @@ import com.krispy.kelompok1_jdih.data.model.DOKUMEN_ID_EKSTRA
 import com.krispy.kelompok1_jdih.data.model.DokumenModel
 import com.krispy.kelompok1_jdih.data.model.ResponseModel
 import com.krispy.kelompok1_jdih.databinding.ActivityDokumenDetailBinding
+import com.krispy.kelompok1_jdih.ui.home.dokumen.DokumenTambahActivity.Companion.DOKUMEN_DATA_UPDATED
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,11 +45,12 @@ class DokumenDetailActivity : AppCompatActivity() {
     private lateinit var dokumen: DokumenModel.Data
     private val api by lazy { ApiRetrofit().endpoint }
 
-    var status_id : Int = 0
-    var filePath : String = ""
+    var status_id: Int = 0
+    var filePath: String = ""
 
     companion object {
         private const val REQUEST_EDIT_DOKUMEN = 1
+        private const val REQUEST_WRITE_PERMISSION = 100
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,18 +68,19 @@ class DokumenDetailActivity : AppCompatActivity() {
         setupListener()
     }
 
-    private fun setupData(){
+    private fun setupData() {
         intent.getSerializableExtra(DOKUMEN_DATA_EXTRA)?.let {
             dokumen = it as DokumenModel.Data
             displayData(dokumen)
+            loadSavedFontSize()
         } ?: run {
             Toast.makeText(this, "Failed to retrieve class data", Toast.LENGTH_SHORT).show()
             finish()
         }
     }
 
-    private fun displayData(dokumen : DokumenModel.Data) {
-        with(binding){
+    private fun displayData(dokumen: DokumenModel.Data) {
+        with(binding) {
             tvTipe.text = dokumen.tipe
             tvJudulDokumen.text = dokumen.judul
             tvNomor.text = dokumen.nomor
@@ -83,20 +97,18 @@ class DokumenDetailActivity : AppCompatActivity() {
         filePath = dokumen.url_file
     }
 
-    private fun setupStatus(){
+    private fun setupStatus() {
         if (status_id != 0) {
             binding.tvStatus.setBackgroundResource(R.color.blue)
         }
     }
 
     private fun setupListener() {
-        with(binding){
+        with(binding) {
             btnBack.setOnClickListener { finish() }
             btnQr.setOnClickListener { setupQr() }
-            btnShare.setOnClickListener { setupShare()}
-            btnDownload.setOnClickListener( {setupDownload()})
-
-            // Check login state and show/hide More button
+            btnShare.setOnClickListener { setupShare() }
+            btnDownload.setOnClickListener { setupDownload() }
             val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
             val isLoggedIn = sharedPreferences.getBoolean("is_logged_in", false)
             if (isLoggedIn) {
@@ -105,7 +117,85 @@ class DokumenDetailActivity : AppCompatActivity() {
             } else {
                 btnMore.visibility = View.GONE
             }
+
+            btnFzise.setOnClickListener { showFontSizeDialog() }
         }
+    }
+
+    private fun showFontSizeDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.sb_font, null)
+        val seekBarFontSize = dialogView.findViewById<SeekBar>(R.id.seekBarFontSize)
+        val tvFontSizeLabel = dialogView.findViewById<TextView>(R.id.tvFontSizeLabel)
+
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val savedFontSize = sharedPreferences.getInt("font_size", 1)
+        seekBarFontSize.progress = savedFontSize
+
+        updateFontSizeLabel(tvFontSizeLabel, savedFontSize)
+
+        seekBarFontSize.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                updateFontSizeLabel(tvFontSizeLabel, progress)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+
+        AlertDialog.Builder(this)
+            .setTitle("Select Font Size")
+            .setView(dialogView)
+            .setPositiveButton("OK") { _, _ ->
+                val selectedFontSize = seekBarFontSize.progress
+                saveFontSizePreference(selectedFontSize)
+                applyFontSize(selectedFontSize)
+            }
+            .setNegativeButton("Cancel", null)
+            .create()
+            .show()
+    }
+
+    private fun updateFontSizeLabel(label: TextView, fontSize: Int) {
+        val sizeText = when (fontSize) {
+            0 -> "Small"
+            1 -> "Medium"
+            2 -> "Large"
+            else -> "Medium"
+        }
+        label.text = "Font Size: $sizeText"
+    }
+
+    private fun saveFontSizePreference(fontSize: Int) {
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("font_size", fontSize)
+        editor.apply()
+    }
+
+    private fun applyFontSize(fontSize: Int) {
+        val sizeInSp = when (fontSize) {
+            0 -> 12f
+            1 -> 16f
+            2 -> 20f
+            else -> 16f
+        }
+        with(binding) {
+            tvJudulDokumen.textSize = sizeInSp
+            tvTipe.textSize = sizeInSp
+            tvNomor.textSize = sizeInSp
+            tvSumber.textSize = sizeInSp
+            tvPtd.textSize = sizeInSp
+            tvPenetapan.textSize = sizeInSp
+            tvTgl.textSize = sizeInSp
+            tvStatus.textSize = sizeInSp
+            tvFile.textSize = sizeInSp
+        }
+    }
+
+    private fun loadSavedFontSize() {
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val savedFontSize = sharedPreferences.getInt("font_size", 1)
+        applyFontSize(savedFontSize)
     }
 
     private fun showPopMenu() {
@@ -166,13 +256,18 @@ class DokumenDetailActivity : AppCompatActivity() {
     }
 
     private fun setupDownload() {
-        // Implementation for setupDownload
+        if (filePath.isNotEmpty()) {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(filePath))
+            startActivity(browserIntent)
+        } else {
+            Toast.makeText(this, "File path is empty", Toast.LENGTH_SHORT).show()
+        }
     }
 
-    private fun setupShare(){
+    private fun setupShare() {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, "Check out this document: $filePath")
+            putExtra(Intent.EXTRA_TEXT, filePath)
             type = "text/plain"
         }
         val shareIntent = Intent.createChooser(sendIntent, null)
@@ -205,4 +300,21 @@ class DokumenDetailActivity : AppCompatActivity() {
             Toast.makeText(this, "Failed to generate QR code", Toast.LENGTH_SHORT).show()
         }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_EDIT_DOKUMEN && resultCode == Activity.RESULT_OK) {
+            data?.getBooleanExtra(DOKUMEN_DATA_UPDATED, false)?.let { isUpdated ->
+                if (isUpdated) {
+                    // Ambil data dokumen yang telah diperbarui
+                    val updatedDokumen = data.getSerializableExtra(DOKUMEN_DATA_EXTRA) as? DokumenModel.Data
+                    updatedDokumen?.let {
+                        dokumen = it
+                        displayData(it) // Menampilkan data yang telah diperbarui
+                    }
+                }
+            }
+        }
+    }
+
 }

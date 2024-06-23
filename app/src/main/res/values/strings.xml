@@ -27,12 +27,12 @@
     <string name="beranda">Beranda</string>
     <string name="dashboard">Dashboard</string>
     <string name="profile">Profile</string>
-    <string name="log_in">Masuk dengan ID Admin</string>
+    <string name="log_in">Masuk Sebagai Admin</string>
     <string name="cari">Cari</string>
     <string name="profil">Profil</string>
     <string name="add_docs">Tambah Dokumen Produk Hukum</string>
     <string name="judul">Judul</string>
     <string name="nomor">Nomor</string>
-    <string name="about"> JDIH: Jaringan Dokumentasi dan Informasi Hukum</string>
+    <string name="about"> Jaringan Dokumentasi dan Informasi Hukum</string>
 
 </resources>

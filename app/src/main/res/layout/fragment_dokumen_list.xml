@@ -53,54 +53,63 @@
         </LinearLayout>
 
 
-        <ScrollView
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/rounded_background_white"
             android:elevation="4dp"
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+            >
 
             <LinearLayout
                 android:id="@+id/filter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="gone"
-                android:paddingHorizontal="8dp"
-                android:background="@drawable/rounded_background_white">
+                android:visibility="gone">
 
                 <Button
+                    android:id="@+id/btn_peraturan"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:text="Peraturan"
                     android:gravity="center_vertical"
-                    android:backgroundTint="@color/gray"/>
+                    android:background="@drawable/outline_black"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="4dp"/>
 
                 <Button
+                    android:id="@+id/btn_monografi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="Monografi"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/outline_black"
+                    android:layout_marginEnd="4dp"
+                    android:textColor="@color/white"/>
+
+                <Button
+                    android:id="@+id/btn_putusan"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:text="Putusan"
                     android:gravity="center_vertical"
-                    android:backgroundTint="@color/gray"/>
+                    android:background="@drawable/outline_black"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="4dp"/>
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="36dp"
-                    android:backgroundTint="@color/gray"
-                    android:gravity="center_vertical"
-                    android:text="Monografi" />
-
-                <Button
+                    android:id="@+id/btn_artikel"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:text="Artikel"
                     android:gravity="center_vertical"
-                    android:backgroundTint="@color/gray"/>
+                    android:background="@drawable/outline_black"
+                    android:textColor="@color/white"/>
             </LinearLayout>
+        </HorizontalScrollView>
 
-
-        </ScrollView>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -112,7 +121,8 @@
                 android:id="@+id/rv_dokumen"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/item_dokumen" />
+                tools:listitem="@layout/item_dokumen"
+                android:layout_marginBottom="56dp"/>
         </FrameLayout>
 
 

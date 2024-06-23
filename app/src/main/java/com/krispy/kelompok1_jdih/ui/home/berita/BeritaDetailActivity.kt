@@ -1,5 +1,6 @@
 package com.krispy.kelompok1_jdih.ui.home.berita
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -7,6 +8,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.PopupMenu
+import android.widget.SeekBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +35,7 @@ class BeritaDetailActivity : AppCompatActivity() {
 
     companion object {
         private const val REQUEST_EDIT_BERITA = 1
+        private const val BERITA_DATA_UPDATED = "berita_data_updated"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,10 +54,8 @@ class BeritaDetailActivity : AppCompatActivity() {
     }
 
     private fun setupListener() {
-
         with(binding) {
             btnBack.setOnClickListener { finish() }
-
             val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
             val isLoggedIn = sharedPreferences.getBoolean("is_logged_in", false)
             if (isLoggedIn) {
@@ -62,6 +64,7 @@ class BeritaDetailActivity : AppCompatActivity() {
             } else {
                 btnMore.visibility = View.GONE
             }
+            btnFzise.setOnClickListener { showFontSizeDialog() }
         }
     }
 
@@ -125,12 +128,18 @@ class BeritaDetailActivity : AppCompatActivity() {
         intent.getSerializableExtra(BERITA_DATA_EXTRA)?.let {
             berita = it as BeritaModel.Data
             displayData(berita)
+            loadSavedFontSize()
         } ?: run {
             Toast.makeText(this, "Failed to retrieve class data", Toast.LENGTH_SHORT).show()
-
         }
-
     }
+
+    private fun loadSavedFontSize() {
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val savedFontSize = sharedPreferences.getInt("font_size", 1) // Default to medium
+        applyFontSize(savedFontSize)
+    }
+
 
     private fun displayData(berita: BeritaModel.Data) {
         with(binding) {
@@ -142,6 +151,82 @@ class BeritaDetailActivity : AppCompatActivity() {
         Log.d("CekDetail", "displayData: ${berita.url_cover}")
         Picasso.get().load(berita.url_cover).into(binding.ivCover)
     }
+
+    private fun showFontSizeDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.sb_font, null)
+        val seekBarFontSize = dialogView.findViewById<SeekBar>(R.id.seekBarFontSize)
+        val tvFontSizeLabel = dialogView.findViewById<TextView>(R.id.tvFontSizeLabel)
+
+        // Load saved font size preference
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val savedFontSize = sharedPreferences.getInt("font_size", 1) // Default to medium
+        seekBarFontSize.progress = savedFontSize
+
+        updateFontSizeLabel(tvFontSizeLabel, savedFontSize)
+
+        seekBarFontSize.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                updateFontSizeLabel(tvFontSizeLabel, progress)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+
+        AlertDialog.Builder(this)
+            .setTitle("Select Font Size")
+            .setView(dialogView)
+            .setPositiveButton("OK") { dialog, which ->
+                val selectedFontSize = seekBarFontSize.progress
+                saveFontSizePreference(selectedFontSize)
+                applyFontSize(selectedFontSize)
+            }
+            .setNegativeButton("Cancel", null)
+            .create()
+            .show()
+    }
+
+    private fun updateFontSizeLabel(label: TextView, fontSize: Int) {
+        val sizeText = when (fontSize) {
+            0 -> "Small"
+            1 -> "Medium"
+            2 -> "Large"
+            else -> "Medium"
+        }
+        label.text = "Font Size: $sizeText"
+    }
+
+    private fun saveFontSizePreference(fontSize: Int) {
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("font_size", fontSize)
+        editor.apply()
+    }
+
+    private fun applyFontSize(fontSize: Int) {
+        val sizeInSp = when (fontSize) {
+            0 -> 12f // Small
+            1 -> 16f // Medium
+            2 -> 20f // Large
+            else -> 16f // Default to Medium
+        }
+        binding.tvJudul.textSize = sizeInSp + 2
+        binding.tvIsi.textSize = sizeInSp
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_EDIT_BERITA && resultCode == Activity.RESULT_OK) {
+            if (data?.getBooleanExtra(BERITA_DATA_UPDATED, false) == true) {
+                Log.d("CekDetail",  BERITA_DATA_UPDATED)
+                setupData() // Memuat ulang data berita setelah berhasil diupdate
+            }
+        }
+    }
+
+
+
+
 
 
 }

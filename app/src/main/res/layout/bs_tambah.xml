@@ -16,9 +16,10 @@
         android:id="@+id/btn_tambah_dokumen"
         android:layout_width="256dp"
         android:layout_height="48dp"
-        android:layout_marginTop="24dp"
         android:layout_gravity="center"
+        android:layout_marginTop="24dp"
         android:backgroundTint="@color/purple"
+        android:fontFamily="@font/poppins_medium"
         android:text="Tambah Dokumen"
         android:textColor="@color/white"
         android:textSize="16sp" />
@@ -27,9 +28,10 @@
         android:id="@+id/btn_tambah_berita"
         android:layout_width="256dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="48dp"
         android:layout_gravity="center"
+        android:layout_marginBottom="48dp"
         android:backgroundTint="@color/purple"
+        android:fontFamily="@font/poppins_medium"
         android:text="Tambah Berita"
         android:textColor="@color/white"
         android:textSize="16sp" />

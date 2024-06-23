@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.krispy.kelompok1_jdih.R
 import com.krispy.kelompok1_jdih.data.listener.DokumenClickListener
 import com.krispy.kelompok1_jdih.data.model.DokumenModel
 import com.krispy.kelompok1_jdih.databinding.ItemDokumenBinding
@@ -19,6 +20,11 @@ class DokumenAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: DokumenModel.Data) {
             with(binding) {
+                if (data.status_id == 1) {
+                    binding.tvStatus.setBackgroundResource(R.color.blue)
+                } else {
+                    binding.tvStatus.setBackgroundResource(R.color.red)
+                }
                 tvTgl.text = data.tgl_penetapan
                 tvStatus.text = data.status
                 tvTipe.text = data.tipe
@@ -26,6 +32,8 @@ class DokumenAdapter(
                 itemDokumen.setOnClickListener {
                     listener.onClick(data)
                 }
+
+
             }
             Log.d("DokumenAdapter", "Data: $data")
         }

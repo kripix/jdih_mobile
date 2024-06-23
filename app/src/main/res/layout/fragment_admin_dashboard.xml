@@ -8,17 +8,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.admin.DashboardFragment" >
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:typeface="serif"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="8dp"/>
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="195dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/gambar_jdih" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -34,27 +29,158 @@
             android:elevation="5dp"
             android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@+id/frameLayout"
+            <LinearLayout
+                android:id="@+id/frameLayout3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/rounded_background_white"
-                android:elevation="4dp">
+                android:layout_height="108dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center">
 
-                <VideoView
-                    android:id="@+id/videoView"
-                    android:layout_width="match_parent"
-                    android:layout_height="198dp" />
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_background_white"
+                    android:elevation="4dp"
+                    android:layout_marginEnd="6dp"
+                    >
 
-            </FrameLayout>
+                    <ImageView
+                        android:id="@+id/buku1"
+                        android:layout_width="match_parent"
+                        android:layout_height="41dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/baseline_book_24" />
+
+                    <TextView
+                        android:id="@+id/z_peraturan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="68dp"
+                        android:text="9999"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/peraturan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="48dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="Peraturan"
+                        android:textAlignment="center" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/rounded_background_white"
+                    android:elevation="4dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/buku2"
+                        android:layout_width="match_parent"
+                        android:layout_height="41dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/baseline_book_24" />
+
+                    <TextView
+                        android:id="@+id/z_monografi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="68dp"
+                        android:text="9999"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/monografi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="48dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="Monografi"
+                        android:textAlignment="center" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/rounded_background_white"
+                    android:elevation="4dp">
+
+                    <ImageView
+                        android:id="@+id/buku3"
+                        android:layout_width="match_parent"
+                        android:layout_height="41dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/baseline_book_24" />
+
+                    <TextView
+                        android:id="@+id/z_artikel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="68dp"
+                        android:text="9999"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/artikel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="48dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="Artikel"
+                        android:textAlignment="center" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_background_white"
+                    android:elevation="4dp">
+
+                    <ImageView
+                        android:id="@+id/buku4"
+                        android:layout_width="match_parent"
+                        android:layout_height="41dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/baseline_book_24" />
+
+                    <TextView
+                        android:id="@+id/z_putusan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="68dp"
+                        android:text="9999"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/putusan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="48dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="Putusan"
+                        android:textAlignment="center" />
+                </FrameLayout>
+            </LinearLayout>
 
             <FrameLayout
                 android:id="@+id/frameLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="242dp"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/rounded_background_white"
                 android:elevation="4dp">
 
@@ -95,7 +221,8 @@
                         android:id="@+id/rv_dokumen"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:listitem="@layout/item_dokumen" />
+                        tools:listitem="@layout/item_dokumen"
+                        />
 
                 </LinearLayout>
 
@@ -129,7 +256,9 @@
                         android:id="@+id/rv_berita"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:listitem="@layout/item_berita" />
+                        tools:listitem="@layout/item_berita"
+                        android:layout_marginBottom="56dp"
+                        />
                 </LinearLayout>
             </FrameLayout>
 

@@ -4,19 +4,23 @@ import com.krispy.kelompok1_jdih.data.model.BeritaModel
 import com.krispy.kelompok1_jdih.data.model.DokumenModel
 import com.krispy.kelompok1_jdih.data.model.ResponseModel
 import com.krispy.kelompok1_jdih.data.model.TipeModel
+import com.krispy.kelompok1_jdih.data.model.UploadResponse
 import com.krispy.kelompok1_jdih.data.model.UserModel
 import com.krispy.kelompok1_jdih.data.model.UserResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Query
 import retrofit2.http.Url
 
 interface ApiEndpoint {
-
 
     @GET("get_user.php")
     fun getUser(
@@ -24,71 +28,82 @@ interface ApiEndpoint {
         @Query("password") password: String
     ): Call<UserResponse>
 
-    @GET("get_dokumen.php")
-    fun get_dokumen (@Query("userId") userId : Int) : Call<DokumenModel>
+
 
     @GET("get_berita.php")
     fun get_berita(
         @Query("userId") userId : Int
     ): Call<BeritaModel>
+    @GET("get_dokumen.php")
 
-    @FormUrlEncoded
+    fun get_dokumen (
+        @Query("user_id") user_id : Int
+    ) : Call<DokumenModel>
+
+    @Multipart
     @POST("create_dokumen.php")
     fun create_dokumen(
-        @Field("judul") judul : String,
-        @Field("nomor") nomor : String,
-        @Field("sumber") sumber : String,
-        @Field("penandatanganan") penandatanganan : String,
-        @Field("tempat_penetapan") tempat_penetapan : String,
-        @Field("tgl_penetapan") tgl_penetapan : String,
-        @Field("tipe_id") tipe_id : Int,
-        @Field("status_id") status_id : Int,
-        @Field("sifat_id") sifat_id : Int,
-        @Field("url_file") url_file : String
+        @Part("judul") judul : RequestBody,
+        @Part("nomor") nomor : RequestBody,
+        @Part("sumber") sumber : RequestBody,
+        @Part("penandatanganan") penandatanganan : RequestBody,
+        @Part("tempat_penetapan") tempat_penetapan : RequestBody,
+        @Part("tgl_penetapan") tgl_penetapan : RequestBody,
+        @Part("tipe_id") tipe_id : RequestBody,
+        @Part("status_id") status_id : RequestBody,
+        @Part("sifat_id") sifat_id : RequestBody,
+        @Part dokumen: MultipartBody.Part
     ): Call<ResponseModel>
 
-    @FormUrlEncoded
-    @POST("create_berita.php")
-    fun create_berita(
-        @Field("judul") judul : String,
-        @Field("isi") isi : String,
-        @Field("url_cover") url_cover : String
-    ) : Call<ResponseModel>
-
-    @FormUrlEncoded
+    @Multipart
     @POST("update_dokumen.php")
     fun update_dokumen(
-        @Field("id") id : Int,
-        @Field("judul") judul : String,
-        @Field("nomor") nomor : String,
-        @Field("sumber") sumber : String,
-        @Field("penandatanganan") penandatanganan : String,
-        @Field("tempat_penetapan") tempat_penetapan : String,
-        @Field("tgl_penetapan") tgl_penetapan : String,
-        @Field("tipe_id") tipe_id : Int,
-        @Field("status_id") status_id : Int,
-        @Field("sifat_id") sifat_id : Int,
-        @Field("url_file") url_file : String
-    ) : Call<ResponseModel>
+        @Part("id") id : RequestBody,
+        @Part("judul") judul : RequestBody,
+        @Part("nomor") nomor : RequestBody,
+        @Part("sumber") sumber : RequestBody,
+        @Part("penandatanganan") penandatanganan : RequestBody,
+        @Part("tempat_penetapan") tempat_penetapan : RequestBody,
+        @Part("tgl_penetapan") tgl_penetapan : RequestBody,
+        @Part("tipe_id") tipe_id : RequestBody,
+        @Part("status_id") status_id : RequestBody,
+        @Part("sifat_id") sifat_id : RequestBody,
+        @Part("url_cover") url_cover : RequestBody,
+        @Part dokumen: MultipartBody.Part?
+        ) : Call<ResponseModel>
 
-    @FormUrlEncoded
+
+    @Multipart
+    @POST("create_berita.php")
+    fun createBerita(
+        @Part("judul") judul: RequestBody,
+        @Part("isi") isi: RequestBody,
+        @Part cover: MultipartBody.Part
+    ): Call<ResponseModel>
+
+
+
+    @Multipart
     @POST("update_berita.php")
-    fun update_berita(
-        @Field("id") id : Int,
-        @Field("judul") judul : String,
-        @Field("isi") isi : String,
-        @Field("url_cover") url_cover : String
-    ) : Call<ResponseModel>
+    fun updateBerita(
+        @Part("id") id: RequestBody,
+        @Part("judul") judul: RequestBody,
+        @Part("isi") isi: RequestBody,
+        @Part("url_cover") url_cover: RequestBody,
+        @Part cover: MultipartBody.Part?
+    ): Call<ResponseModel>
 
-    @FormUrlEncoded
+    @Multipart
     @POST("update_user.php")
-    fun update_profile(
-        @Field("id") id : Int,
-        @Field("nama_lengkap") nama_lengkap : String,
-        @Field("username") username: String,
-        @Field("password") password: String,
-        @Field("url_foto") url_profile : String
-    ) : Call<ResponseModel>
+    fun updateProfile(
+        @Part("id") id: RequestBody,
+        @Part("nama_lengkap") nama_lengkap: RequestBody,
+        @Part("username") username: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("url_foto") url_foto:  RequestBody,
+        @Part foto: MultipartBody.Part?
+    ): Call<ResponseModel>
+
 
     @FormUrlEncoded
     @POST("delete_dokumen.php")

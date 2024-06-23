@@ -69,8 +69,7 @@ class DashboardFragment : Fragment(), BeritaClickListener, DokumenClickListener 
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAdminDashboardBinding.inflate(inflater, container, false)
-
-
+        initData()
         initAdapter()
         setupListener()
         return binding.root
@@ -125,6 +124,12 @@ class DashboardFragment : Fragment(), BeritaClickListener, DokumenClickListener 
         fragmentTransaction.commit()
     }
 
+    private fun initData() {
+        val sharedPreferences = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        userId = sharedPreferences.getInt("user_id", -1)
+        Log.d("UserID ", "userId: $userId")
+    }
+
     private fun getBerita() {
         api.get_berita(userId).enqueue(object : Callback<BeritaModel> {
             override fun onResponse(call: Call<BeritaModel>, response: Response<BeritaModel>) {
@@ -153,6 +158,7 @@ class DashboardFragment : Fragment(), BeritaClickListener, DokumenClickListener 
                     response.body()?.dokumen?.let { listData ->
                         dokumenAdapter.setData(listData)
                         Log.d("HomeFragment", "Dokumen data: ${listData}")
+                        updateDocumentCounts(listData)
                     } ?: run {
                         Log.e("HomeFragment", "Empty Dokumen response")
                     }
@@ -166,6 +172,19 @@ class DashboardFragment : Fragment(), BeritaClickListener, DokumenClickListener 
             }
         })
     }
+
+    private fun updateDocumentCounts(dokumenList: List<DokumenModel.Data>) {
+        val peraturanCount = dokumenList.count { it.tipe_id == 1 }
+        val monografiCount = dokumenList.count { it.tipe_id == 3 }
+        val artikelCount = dokumenList.count { it.tipe_id == 4 }
+        val putusanCount = dokumenList.count { it.tipe_id == 2 }
+
+        binding.zPeraturan.text = peraturanCount.toString()
+        binding.zMonografi.text = monografiCount.toString()
+        binding.zArtikel.text = artikelCount.toString()
+        binding.zPutusan.text = putusanCount.toString()
+    }
+
 
     companion object {
         /**

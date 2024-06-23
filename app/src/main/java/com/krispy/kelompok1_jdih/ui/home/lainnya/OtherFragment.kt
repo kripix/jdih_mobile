@@ -7,12 +7,15 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
 import android.text.TextUtils
+import android.text.TextUtils.replace
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import com.google.android.gms.maps.MapFragment
 import com.krispy.kelompok1_jdih.R
 import com.krispy.kelompok1_jdih.data.api.ApiRetrofit
 import com.krispy.kelompok1_jdih.data.model.UserModel
@@ -33,6 +36,7 @@ class OtherFragment : Fragment() {
     private lateinit var btnLogin: Button
     private lateinit var tgglPassword: CheckBox
     private val api by lazy { ApiRetrofit().endpoint }
+    private var lgn = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +57,28 @@ class OtherFragment : Fragment() {
             btnShowLogin.setOnClickListener {
                 dialogin.show()
             }
+            btnAlamat.setOnClickListener {
+                if (lgn) {
+                    parentFragmentManager.commit {
+                        replace(R.id.container, MapsFragment())
+                        addToBackStack("OtherFragment")  // Menambahkan nama fragment saat ini ke back stack
+                    }
+                } else {
+                    parentFragmentManager.commit {
+                        replace(R.id.main, MapsFragment())
+                        addToBackStack("OtherFragment")  // Menambahkan nama fragment saat ini ke back stack
+                    }
+                }
+            }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        // Memastikan untuk menghapus login status ketika fragment di-resume
+        checkLoginStatus()
+    }
+
 
     private fun jdihn() {
         val myIg = "https://jdihn.go.id/"
@@ -96,8 +120,10 @@ class OtherFragment : Fragment() {
         val isLoggedIn = sharedPreferences.getBoolean("is_logged_in", false)
         if (isLoggedIn) {
             binding.frameLogin.visibility = View.GONE
+            lgn = true
         } else {
             binding.frameLogin.visibility = View.VISIBLE
+            lgn = false
         }
     }
 
@@ -117,15 +143,12 @@ class OtherFragment : Fragment() {
                     if (userResponse.result.isNotEmpty()) {
                         val user = userResponse.result[0]
                         Toast.makeText(context, "Login berhasil", Toast.LENGTH_SHORT).show()
-
                         // Save login state
                         val sharedPreferences = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
                         sharedPreferences.edit().putBoolean("is_logged_in", true).apply()
                         sharedPreferences.edit().putInt("user_id", user.id).apply()
                         sharedPreferences.edit().putString("username", user.username).apply()
                         sharedPreferences.edit().putString("password", user.password).apply()
-                        sharedPreferences.edit().putString("nama_lengkap", user.nama_lengkap).apply()
-                        sharedPreferences.edit().putString("url_foto", user.url_foto).apply()
 
                         // Redirect to admin activity
                         val intent = Intent(requireActivity(), MainActivityAdm::class.java)

@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.MainActivity">
 
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="0dp"
